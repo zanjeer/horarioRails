@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <tbody  id="cursos">
+    <% @cursos.each do |curso| %>
+      <tr id="<%= curso.name %>">
+        <td>
+          <%= curso.name %>
+        </td>
+        <td class="table-btn" >
+          <%= link_to lista_asi_path(:id => curso.id), :class => "btn btn-default",
+                      id: curso.id, method: :POST, data: {  remote: true } do %>
+            <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

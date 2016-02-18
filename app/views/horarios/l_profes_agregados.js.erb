@@ -1,0 +1,7 @@
+// curso + asignatura agregada + lista profes
+
+$('.btn-warning').addClass('btn-success').removeClass('btn-warning');
+$('#<%= "asi_#{@id_asig}" %>').addClass('btn-warning').removeClass('btn-default');
+
+$('#profe_sin_asignar').html('<%= j render @professors %>');
+$('#lista_profes').show()

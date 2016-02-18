@@ -1,0 +1,10 @@
+// curso + asignatura nueva + lista profes
+
+// reload lista asignaturas, cambiar los path
+$('#sin_asignar').html('<%= j render @asignaturas %>');
+
+$('.btn-warning').addClass('btn-success').removeClass('btn-warning');
+$('#<%= "asi_#{@id_asig}" %>').addClass('btn-warning').removeClass('btn-default');
+
+$('#profe_sin_asignar').html('<%= j render @professors %>');
+$('#lista_profes').show()

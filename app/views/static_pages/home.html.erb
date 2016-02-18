@@ -1,0 +1,31 @@
+<div class="row" >
+  <aside class="col-md-4">
+    <h2>Cursos</h2>
+    <table class="table table-striped">
+      <tbody  id="cursos">
+        <%= render @cursos %>
+      </tbody>
+    </table>
+    <%= render 'cursos/form' %>
+  </aside>
+
+  <aside class="col-md-4">
+    <h2>Profesores</h2>
+    <table class="table table-striped">
+      <tbody id="profes">
+        <%= render @profes %>
+      </tbody>
+    </table>
+    <%= render 'professors/form' %>
+  </aside>
+
+  <aside class="col-md-4">
+    <h2>Asignaturas</h2>
+    <table class="table table-striped">
+      <tbody id="asigs">
+        <%= render @asigs %>
+      </tbody>
+    </table>
+    <%= render 'asignaturas/form' %>
+  </aside>
+</div>

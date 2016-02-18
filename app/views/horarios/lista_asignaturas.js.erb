@@ -1,0 +1,10 @@
+// cursos + lista asignatura
+      
+// lista asig
+$('#sin_asignar').html('<%= j render @asignaturas %>');
+$('#lista_asig').show()
+$('#lista_profes').hide()
+
+// cambio btn
+$('.btn-danger').addClass('btn-default').removeClass('btn-danger');
+$('#<%= @id_curso %>').addClass('btn-danger').removeClass('btn-default');

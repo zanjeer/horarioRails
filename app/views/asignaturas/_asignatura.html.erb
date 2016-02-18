@@ -1,0 +1,48 @@
+  <tr id="<%= asignatura.name %>">
+    <% unless @horario %>
+      <td>
+        <span><%= asignatura.name %></span>
+      </td>
+      <td>
+        <%=  asignatura.lectiva? %>
+      </td>
+      <!-- boton para eliminar, no  se muestra cuando  se asignan  a cursos, etc -->
+      <td style="text-align: right">
+        <%= link_to "X", asignatura, method: :delete, id: asignatura.id, data: { confirm: "borrar?", remote: true } %>
+      </td>
+    <% else %>
+      <!-- para asignar asignaturas al horario -->
+      <td>
+        <span><%= asignatura.name %></span>
+      </td>
+      <td>
+        <%=  asignatura.lectiva? %>
+      </td>
+      <td style="text-align: right">
+        <% if esta_asignada asignatura.id %>
+
+          <%= link_to borrar_asig_agregados_path(:id_asig => asignatura.id, :id_curso => @horario.curso_id),
+                      :class => "btn btn-default btn-xs",id: "borrar_#{asignatura.id}", method: :POST,data: {  remote: true } do %>
+
+                      <i class="glyphicon glyphicon-remove" style="color: #CA2B2B"></i>
+          <% end %>
+
+          <!-- agregar asignaturas -->
+          <%= link_to lista_profes_agregados_path(:id_asig => asignatura.id, :id_curso => @horario.curso_id),
+                      :class => "btn btn-success",id: "asi_#{asignatura.id}", method: :POST,data: {  remote: true } do %>
+
+                      <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
+
+        <% else %>
+
+          <%= link_to lista_profes_path(:id_asig => asignatura.id, :id_curso => @horario.curso_id),
+                      :class => "btn btn-default",id: "asi_#{asignatura.id}", method: :POST,data: {  remote: true } do %>
+
+                      <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
+
+        <% end %>
+      </td>
+    <% end %>
+  </tr>

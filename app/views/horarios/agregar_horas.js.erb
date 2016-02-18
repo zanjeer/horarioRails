@@ -1,0 +1,9 @@
+// curso + asignatura + profe + horas
+
+$('.btn-primary').addClass('btn-default').removeClass('btn-primary');
+
+
+$('#<%= "profe_#{@id_profe}" %>').removeClass('btn-default').addClass('btn-primary');
+$('.glyphicon-minus').addClass('glyphicon-plus').removeClass('glyphicon-minus');
+$('#<%= "profe_#{@id_profe}" %>').children().removeClass('glyphicon-plus').addClass('glyphicon-minus');
+$('#profe_sin_asignar').html('<%= j render @professors %>');

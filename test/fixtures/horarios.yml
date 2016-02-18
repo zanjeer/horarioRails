@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  horas: 
+  asignatura_id: 
+  professor_id: 
+
+two:
+  horas: 
+  asignatura_id: 
+  professor_id: 

@@ -1,0 +1,19 @@
+<div class="row">
+  <span class=""><%= horario.id %></span>
+  <span class=""> -> </span>
+  <% if horario.curso %>
+    <span class=""><%= horario.curso.name %></span>
+  <% end %>
+  <span class=""> -> </span>
+  <span class=""><%= horario.horas %></span>
+  <span class=""> -> </span>
+  <% if horario.asignatura %>
+    <span class=""><%= horario.asignatura.name %></span>
+  <% end %>
+  <span class=""> -> </span>
+  <% if horario.professor %>
+    <span class=""><%= horario.professor.name %></span>
+  <% end %>
+
+
+</div>
