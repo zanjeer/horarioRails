@@ -73,6 +73,15 @@ class HorariosController < ApplicationController
     @horario = Horario.find_by(curso_id: @id_curso, asignatura_id: @id_asig)
     @horario.destroy
   end
+
+  def horas_ajax
+    @id_curso = params[:id_curso]
+    @id_asig = params[:id_asig]
+    @horas = params[:horas]
+    @horario = Horario.find_by(curso_id: @id_curso, asignatura_id: @id_asig)
+    @horario.horas = @horas
+    @horario.save
+  end
   # GET /horarios
   # GET /horarios.json
   def index

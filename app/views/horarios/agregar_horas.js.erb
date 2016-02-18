@@ -7,3 +7,14 @@ $('#<%= "profe_#{@id_profe}" %>').removeClass('btn-default').addClass('btn-prima
 $('.glyphicon-minus').addClass('glyphicon-plus').removeClass('glyphicon-minus');
 $('#<%= "profe_#{@id_profe}" %>').children().removeClass('glyphicon-plus').addClass('glyphicon-minus');
 $('#profe_sin_asignar').html('<%= j render @professors %>');
+
+$('.input_horas').show()
+$('#selec_horas').val('<%= @horario.horas %>')
+$('#selec_horas').on('change',function(){
+  $.ajax({
+    url: "/horas_ajax",
+    method: "POST",
+    data: { horas : $(this).val(), id_horario: '<%= @horario.id %>' },
+    dataType: 'json',
+  });
+});
