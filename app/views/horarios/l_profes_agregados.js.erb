@@ -6,15 +6,5 @@ $('#<%= "asi_#{@id_asig}" %>').addClass('btn-warning').removeClass('btn-default'
 $('#profe_sin_asignar').html('<%= j render @professors %>');
 $('#lista_profes').show()
 $('.input_horas').show()
+$('#selec_horas').attr('name', '<%= @horario.id %>')
 $('#selec_horas').val('<%= @horario.horas %>')
-
-$('document').ready(function(){
-  $('#selec_horas').on('change',function(){
-    $.ajax({
-      url: "/horas_ajax",
-      method: "POST",
-      data: { horas : $(this).val(), id_asig: '<%= @id_asig %>', id_curso: '<%= @id_curso %>' },
-      dataType: 'js',
-    });
-  });
-})

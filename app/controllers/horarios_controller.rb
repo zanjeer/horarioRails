@@ -75,10 +75,9 @@ class HorariosController < ApplicationController
   end
 
   def horas_ajax
-    @id_curso = params[:id_curso]
-    @id_asig = params[:id_asig]
+    @id = params[:id_horario]
     @horas = params[:horas]
-    @horario = Horario.find_by(curso_id: @id_curso, asignatura_id: @id_asig)
+    @horario = Horario.find_by(id: @id)
     @horario.horas = @horas
     @horario.save
   end

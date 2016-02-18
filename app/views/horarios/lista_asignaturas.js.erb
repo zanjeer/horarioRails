@@ -9,11 +9,15 @@ $('#lista_profes').hide()
 $('.btn-danger').addClass('btn-default').removeClass('btn-danger');
 $('#<%= @id_curso %>').addClass('btn-danger').removeClass('btn-default');
 $('.input_horas').hide()
-// $('#selec_horas').on('change',function(){
-//   $.ajax({
-//     url: "/horas_ajax",
-//     method: "POST",
-//     data: { horas : $(this).val(), id_horario: '<%= @horario.id %>' },
-//     dataType: 'json',
-//   });
-// });
+
+
+$('document').ready(function(){
+  $('#selec_horas').on('change',function(){
+    $.ajax({
+      url: "/horas_ajax",
+      method: "POST",
+      data: { horas : $(this).val(), id_horario: $(this).attr('name') },
+      dataType: 'json',
+    });
+  });
+})
