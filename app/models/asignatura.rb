@@ -7,7 +7,7 @@ class Asignatura < ActiveRecord::Base
     if self.lectiva
       @lectiva = "Lectiva"
     else
-      @lectiva = ""
+      @lectiva = "-"
     end
   end
 end

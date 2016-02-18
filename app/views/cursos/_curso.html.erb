@@ -1,6 +1,6 @@
 <tr id="<%= curso.name %>">
   <td>
-    <span><%= curso.name %></span>
+    <span><%= best_in_place curso, :name, tabindex: "1" %></span>
   </td>
   <td style="text-align: right">
     <%= link_to "X", curso, method: :delete, id: curso.id, data: { confirm: "borrar?", remote: true } %>

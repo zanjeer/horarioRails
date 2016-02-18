@@ -1,10 +1,10 @@
   <tr id="<%= asignatura.name %>">
     <% unless @horario %>
       <td>
-        <span><%= asignatura.name %></span>
+        <span><%= best_in_place asignatura, :name, tabindex: "1" %></span>
       </td>
-      <td>
-        <%=  asignatura.lectiva? %>
+      <td style="text-align: center">
+        <%= best_in_place asignatura, :lectiva, as: :checkbox, collection: {true: "Lectiva", false: "-"} %>
       </td>
       <!-- boton para eliminar, no  se muestra cuando  se asignan  a cursos, etc -->
       <td style="text-align: right">
