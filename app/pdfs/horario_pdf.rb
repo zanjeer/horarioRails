@@ -16,10 +16,11 @@ class HorarioPdf < Prawn::Document
     move_down 10
     table profes_info_row(p) do
       row(0).font_style = :bold
-      columns(1..3).align = :left
-      self.row_colors = ["DDDDDD", "FFFFFF"]
+      column(1).align = :right
+      self.row_colors = ["EEEEEE", "FFFFFF"]
       self.header = true
-      self.width = 350
+      self.width = 400
+      column(0).width = 150
     end
     move_down 10
 
