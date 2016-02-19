@@ -7,4 +7,4 @@ $('#profe_sin_asignar').html('<%= j render @professors %>');
 $('#lista_profes').show()
 $('#input_horas').show()
 $('#selec_horas').attr('name', '<%= @horario.id %>')
-$('#selec_horas').val('<%= @horario.horas %>')
+$('#selec_horas').val('<%= @horario.horas.to_s %>')
