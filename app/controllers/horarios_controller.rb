@@ -1,5 +1,18 @@
 class HorariosController < ApplicationController
 
+  def informe
+    @profes = Professor.all
+    respond_to do |format|
+      format.pdf do
+        pdf = HorarioPdf.new(@profes)
+        send_data pdf.render, filename: "horario",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
+  end
+
+
   # se carga la lista de asignaturas asignadas, sin asignar,
   # click en curso
   def lista_asignaturas

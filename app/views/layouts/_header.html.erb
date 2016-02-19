@@ -1,11 +1,9 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-  <%= link_to "HORARIOS", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Agregar Datos", datos_path %></li>
-    
-      </ul>
-    </nav>
+  <div class="container" id="header">
+    <%= link_to root_path, class: "logo" do %>
+      <i class="glyphicon glyphicon-book" id="icon_logo"></i>HORARIOS
+    <% end %>
+    <%= link_to "Agregar Datos", datos_path , class: "logo"%>
+    <%= link_to "Informe", informe_path(format: "pdf") , class: "logo"%>
   </div>
 </header>

@@ -2,8 +2,16 @@
 @import "bootstrap";
 
 /* universal */
-body {
-  padding-top: 60px;
+#jej {  background-color: #EEE; }
+
+#icon_logo {
+  float: left;
+  margin-right: 10px;
+}
+
+#c_jej {
+  padding-top: 80px;
+  background-color: white;
 }
 section {
   overflow: auto;
@@ -43,18 +51,22 @@ p {
 }
 
 /* header */
-#logo {
+.logo {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #fff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 16px;
+  margin-top: 16px;
+  margin-left: 20px;
   font-weight: bold;
 }
-#logo:hover {
-  color: #fff;
+.logo:visited {
+  color: white;
+}
+.logo:hover {
+  margin-top: 20px;
+  color: #eee;
   text-decoration: none;
 }
 

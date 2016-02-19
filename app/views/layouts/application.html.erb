@@ -6,9 +6,9 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body id="jej">
   <%= render 'layouts/header' %>
-  <div class="container">
+  <div class="container" id="c_jej">
     <%= yield %>
      <%= debug(params) if Rails.env.development? %>
   </div>

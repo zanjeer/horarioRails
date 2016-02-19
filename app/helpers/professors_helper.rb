@@ -4,4 +4,5 @@ module ProfessorsHelper
                                     @horario.curso_id, asignatura, profe)
     @profe.any?
   end
+
 end

@@ -5,6 +5,6 @@ $('#<%= "asi_#{@id_asig}" %>').addClass('btn-warning').removeClass('btn-default'
 
 $('#profe_sin_asignar').html('<%= j render @professors %>');
 $('#lista_profes').show()
-$('.input_horas').show()
+$('#input_horas').show()
 $('#selec_horas').attr('name', '<%= @horario.id %>')
 $('#selec_horas').val('<%= @horario.horas %>')

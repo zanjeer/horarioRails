@@ -4,22 +4,30 @@
     <%= render 'dropdown_cursos' %>
   </div>
   <div class="col-md-4" id="lista_asig" hidden>
-    <h2>2.- Seleccione una Asignatura</h2>
+    <h2>
+      <i class="glyphicon glyphicon-menu-right" style="float: left"></i>
+      2.- Seleccione una Asignatura
+    </h2>
     <table class="table table-striped">
       <tbody  id="sin_asignar">
       </tbody>
     </table>
   </div>
   <div class="col-md-4" id="lista_profes" hidden>
-    <h2>3.- Seleccione un Profesor</h2>
+    <h2>
+      <i class="glyphicon glyphicon-menu-right" style="float: left"></i>
+      3.- Seleccione un Profesor
+      <i class="glyphicon glyphicon-menu-right" style="float: right"></i>
+    </h2>
     <table class="table table-striped">
       <tbody  id="profe_sin_asignar">
       </tbody>
     </table>
   </div>
-  <div class="col-md-2" style="text-align: center" >
-    <div class="input_horas" hidden>
-      <h2>4.- Seleccione las Horas</h2>
+  <div class="col-md-2" style="text-align: center" id="input_horas" hidden>
+      <h2>
+        4.- Seleccione las Horas
+      </h2>
       <select class="form-control" id="selec_horas">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -32,7 +40,6 @@
         <option value="9">9</option>
         <option value="10">10</option>
       </select>
-    </div>
   </div>
 </div>
 <br>
