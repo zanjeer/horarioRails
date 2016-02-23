@@ -3,6 +3,9 @@
     <td>
       <span><%= best_in_place professor, :name, tabindex: "1" %></span>
     </td>
+    <td>
+      <span><%= best_in_place professor, :contrato, tabindex: "2" %></span>
+    </td>
     <td style="text-align: right">
       <%= link_to "X", professor, method: :delete, id: professor.id, data: { confirm: "borrar?", remote: true } %>
     </td>

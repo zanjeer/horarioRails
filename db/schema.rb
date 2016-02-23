@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219191135) do
+ActiveRecord::Schema.define(version: 20160223185443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,9 +25,12 @@ ActiveRecord::Schema.define(version: 20160219191135) do
 
   create_table "cursos", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "professor_id"
   end
+
+  add_index "cursos", ["professor_id"], name: "index_cursos_on_professor_id", using: :btree
 
   create_table "horarios", force: :cascade do |t|
     t.decimal  "horas"
@@ -47,8 +50,10 @@ ActiveRecord::Schema.define(version: 20160219191135) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "contrato"
   end
 
+  add_foreign_key "cursos", "professors"
   add_foreign_key "horarios", "asignaturas"
   add_foreign_key "horarios", "cursos"
   add_foreign_key "horarios", "professors"

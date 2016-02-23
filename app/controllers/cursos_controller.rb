@@ -15,6 +15,9 @@ class CursosController < ApplicationController
   # GET /cursos/new
   def new
     @curso = Curso.new
+    @prof_selec = Professor.all.order('name').map do |p|
+        ["#{p.name}","#{p.id}" ]
+    end
   end
 
   # GET /cursos/1/edit
@@ -71,6 +74,6 @@ class CursosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def curso_params
-      params.require(:curso).permit(:name)
+      params.require(:curso).permit(:name, :professor_id)
     end
 end

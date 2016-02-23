@@ -8,6 +8,11 @@ class StaticPagesController < ApplicationController
 
     @asignatura = Asignatura.new
     @asigs = Asignatura.all.order('name')
+
+    @prof_selec = Professor.all.order('name').map do |p|
+        ["#{p.id}", "#{p.name}"]
+    end
+
   end
 
   def horario

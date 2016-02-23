@@ -1,7 +1,7 @@
 class HorariosController < ApplicationController
 
   def informe
-    @profes = Professor.all
+    @profes = Professor.all.order('name')
     respond_to do |format|
       format.pdf do
         pdf = HorarioPdf.new(@profes)
@@ -16,7 +16,7 @@ class HorariosController < ApplicationController
   # se carga la lista de asignaturas asignadas, sin asignar,
   # click en curso
   def lista_asignaturas
-    @asignaturas = Asignatura.all
+    @asignaturas = Asignatura.all.order('name')
     @id_curso = params[:id]
     @horario = Horario.new
     @horario.curso_id = @id_curso
@@ -30,8 +30,8 @@ class HorariosController < ApplicationController
   # se buscan  las asignaturas del curso
   # click en asignatura
   def lista_profes
-    @asignaturas = Asignatura.all
-    @professors = Professor.all
+    @asignaturas = Asignatura.all.order('name')
+    @professors = Professor.all.order('name')
 
     @id_asig = params[:id_asig]
     @id_curso = params[:id_curso]
@@ -45,7 +45,7 @@ class HorariosController < ApplicationController
   end
 
   def l_profes_agregados
-    @professors = Professor.all
+    @professors = Professor.all.order('name')
 
     @id_asig = params[:id_asig]
     @id_curso = params[:id_curso]
@@ -55,7 +55,7 @@ class HorariosController < ApplicationController
 
   # agregar profe + horas
   def agregar_horas
-    @professors = Professor.all
+    @professors = Professor.all.order('name')
 
     @id_asig = params[:id_asig]
     @id_curso = params[:id_curso]
@@ -67,7 +67,7 @@ class HorariosController < ApplicationController
   end
 
   def quitar_horas
-    @professors = Professor.all
+    @professors = Professor.all.order('name')
 
     @id_asig = params[:id_asig]
     @id_curso = params[:id_curso]
@@ -79,7 +79,7 @@ class HorariosController < ApplicationController
   end
 
   def borrar_asignatura
-    @asignaturas = Asignatura.all
+    @asignaturas = Asignatura.all.order('name')
 
     @id_asig = params[:id_asig]
     @id_curso = params[:id_curso]
@@ -97,7 +97,7 @@ class HorariosController < ApplicationController
   # GET /horarios
   # GET /horarios.json
   def index
-    @horarios = Horario.all
+    @horarios = Horario.all.order('name')
   end
 
   # GET /horarios/1

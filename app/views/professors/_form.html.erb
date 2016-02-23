@@ -10,16 +10,20 @@
       </ul>
     </div>
   <% end %>
+
   <div class="row formpls">
+    <div class="col-md-8" >
+        <%= f.text_field :name, placeholder: "Nombre", class: "form-control" %>
+    </div>
+    <div class="col-md-4" >
+        <%= f.text_field :contrato, placeholder: "Hrs Contrato", class: "form-control" %>
+    </div>
+  </div>
 
-
-<div class="col-md-8">
-    <%= f.text_field :name, placeholder: "Nombre", class: "form-control" %>
+<div class="btn_form">
+  <%= f.submit "Crear Profesor", class: 'btn btn-primary' %>
 </div>
 
 
 
-    <%= f.submit "Crear Profesor", class: 'btn btn-primary' %>
-
-  </div>
 <% end %>
