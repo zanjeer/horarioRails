@@ -167,4 +167,5 @@ class HorariosController < ApplicationController
       params.require(:horario).permit(:hora)
     end
 
+    
 end

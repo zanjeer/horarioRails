@@ -40,7 +40,7 @@ class HorarioPdf < Prawn::Document
   end
 
   def horas_cronologicas(profe)
-    (horas_pedagogicas(profe)*45).to_f/60
+    to_time( (horas_pedagogicas(profe)*45).to_f/60 )
   end
 
   def horas_peda_por_asignatura(id_profe, id_asig)
@@ -66,6 +66,24 @@ class HorarioPdf < Prawn::Document
       cursos << " #{a.curso.name} "
     end
     cursos
+  end
+
+  # change number to time
+  # 2.75% => 2.45min
+  def to_time(number)
+    n = number.to_s.split(".") # 1.25 [0]=> 1, [1]=> 25
+    num = n[0]
+    dec = n[1]
+    case dec
+    when "75"
+      final_number = "#{num}.45"
+    when "5"
+      final_number = "#{num}.30"
+    when "25"
+      final_number = "#{num}.15"
+    else
+      final_number = number
+    end
   end
 
 end
