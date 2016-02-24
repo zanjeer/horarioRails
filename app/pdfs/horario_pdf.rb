@@ -27,10 +27,11 @@ class HorarioPdf < Prawn::Document
   end
 
   def profes_info_row(p)
-    [["Docente", "#{p.name}"],
-    ["Horas Pedagogicas" , horas_pedagogicas(p)],
-    ["Horas Cronologicas", horas_cronologicas(p)]]+
-    asignaturas_profe(p)
+    [["Docente", "#{p.name}"]] +
+    asignaturas_profe(p) +
+    [["Horas Pedagogicas" , horas_pedagogicas(p)],
+    ["Horas Cronologicas", horas_cronologicas(p)]]
+
   end
 
   def horas_pedagogicas(profe)
