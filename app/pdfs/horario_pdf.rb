@@ -1,13 +1,16 @@
 include ActionView::Helpers::NumberHelper # <-
 class HorarioPdf < Prawn::Document
 
-  def initialize(profes)
+  def initialize(profes, profes_jefes)
     super(top_margin: 30)
-    @profes = profes
     text "Carga Horaria #{Time.now.year}", :align => :center
     move_down 20
-    text "Profesores:", :align => :left
-    @profes.each do |profe|
+    # text "Profesores:", :align => :left
+    profes_jefes.each do |profe|
+      profes_info(profe)
+    end
+    move_down 10
+    profes.each do |profe|
       profes_info(profe)
     end
   end
@@ -28,6 +31,7 @@ class HorarioPdf < Prawn::Document
 
   def profes_info_row(p)
     [["Docente", "#{p.name}"]] +
+    es_profe_jefe(p) +
     [["Contrato", "#{p.contrato}"]] +
     asignaturas_profe(p) +
     [["Horas Pedagogicas" , horas_pedagogicas(p)],
@@ -87,5 +91,15 @@ class HorarioPdf < Prawn::Document
       final_number = number
     end
   end
+
+  def es_profe_jefe(profe)
+    a = Curso.find_by(professor_id: profe.id)
+    if a
+      [["Curso","#{a.name}."]]
+    else
+      [["Curso", "-"]]
+    end
+  end
+
 
 end
