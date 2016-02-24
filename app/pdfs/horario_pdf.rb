@@ -28,6 +28,7 @@ class HorarioPdf < Prawn::Document
 
   def profes_info_row(p)
     [["Docente", "#{p.name}"]] +
+    [["Contrato", "#{p.contrato}"]] +
     asignaturas_profe(p) +
     [["Horas Pedagogicas" , horas_pedagogicas(p)],
     ["Horas Cronologicas", horas_cronologicas(p)]]
@@ -53,7 +54,7 @@ class HorarioPdf < Prawn::Document
     asi = Horario.where('professor_id = ?', profe.id)
     asi.map(&:asignatura).uniq.map do |a|
       if a.lectiva
-        ["#{a.name}", "#{lista_cursos_por_asig(a.id,profe.id)} -> #{horas_peda_por_asignatura(profe.id,a.id)} " ]
+        ["#{a.name}", "#{lista_cursos_por_asig(a.id,profe.id)} => #{horas_peda_por_asignatura(profe.id,a.id)} " ]
       else
         ["#{a.name}", "#{horas_peda_por_asignatura(profe.id,a.id)}"]
       end
