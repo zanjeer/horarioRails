@@ -7,17 +7,17 @@ class HorarioPdf < Prawn::Document
     move_down 20
     # text "Profesores:", :align => :left
     profes_jefes.each do |profe|
-      profes_info(profe)
+      profes_info(profe,true)
     end
     move_down 10
     profes.each do |profe|
-      profes_info(profe)
+      profes_info(profe,false)
     end
   end
 
-  def profes_info(p)
+  def profes_info(p,jefe)
     move_down 10
-    table profes_info_row(p) do
+    table profes_info_row(p,jefe) do
       row(0).font_style = :bold
       column(1).align = :right
       self.row_colors = ["EEEEEE", "FFFFFF"]
@@ -29,11 +29,11 @@ class HorarioPdf < Prawn::Document
 
   end
 
-  def profes_info_row(p)
+  def profes_info_row(p,jefe)
     [["Docente", "#{p.name}"]] +
     es_profe_jefe(p) +
     [["Contrato", "#{p.contrato}"]] +
-    asignaturas_profe(p) +
+    asignaturas_profe(p,jefe) +
     [["Horas Pedagogicas" , horas_pedagogicas(p)],
     ["Horas Cronologicas", horas_cronologicas(p)]]
 
@@ -54,11 +54,15 @@ class HorarioPdf < Prawn::Document
     per.sum(:horas)
   end
 
-  def asignaturas_profe(profe)
+  def asignaturas_profe(profe,jefe)
     asi = Horario.where('professor_id = ?', profe.id)
     asi.map(&:asignatura).uniq.map do |a|
       if a.lectiva
-        ["#{a.name}", "#{lista_cursos_por_asig(a.id,profe.id)} => #{horas_peda_por_asignatura(profe.id,a.id)} " ]
+        if jefe
+          ["#{a.name}", "#{horas_peda_por_asignatura(profe.id,a.id)} " ]
+        else
+          ["#{a.name}", "#{lista_cursos_por_asig(a.id,profe.id)} => #{horas_peda_por_asignatura(profe.id,a.id)} " ]
+        end
       else
         ["#{a.name}", "#{horas_peda_por_asignatura(profe.id,a.id)}"]
       end
