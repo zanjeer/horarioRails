@@ -1,21 +1,22 @@
 Rails.application.routes.draw do
 
-
-
   root 'static_pages#horario'
   get 'datos' => 'static_pages#home'
   get 'profes' => 'professors#index'
   get 'asignaturas' => 'asignaturas#index'
   get 'cursos'  => 'cursos#index'
   post 'lista_asi' => 'horarios#lista_asignaturas'
+  post 'lista_no_lec' => 'horarios#lista_asig_no_lectivas'
   post 'lista_profes'  => 'horarios#lista_profes'
   post 'lista_profes_agregados' => 'horarios#l_profes_agregados'
+  post 'horas_no_lectivas_agre' => 'horarios#horas_no_lec_agre'
+  post 'horas_no_lectivas'  => 'horarios#horas_no_lec'
   post 'agregar_horas' => 'horarios#agregar_horas'
   post 'quitar_horas' => 'horarios#quitar_horas'
   post 'borrar_asig_agregados' => 'horarios#borrar_asignatura'
   post 'horas_ajax' => 'horarios#horas_ajax'
   get 'informe' => 'horarios#informe'
-  
+
   resources :professors
   resources :asignaturas
   resources :cursos

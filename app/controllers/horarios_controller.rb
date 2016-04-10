@@ -14,14 +14,43 @@ class HorariosController < ApplicationController
     end
   end
 
+  def horas_no_lec
+    @id_asig = params[:id_asig]
+    @id_profe = params[:id_profe]
+    @horario = Horario.new
+    @horario.professor_id = @id_profe
+    @horario.asignatura_id = @id_asig
+    @horario.save()
+
+  end
+
+  def horas_no_lec_agre
+    @id_asig = params[:id_asig]
+    @id_profe = params[:id_profe]
+    @horario = Horario.find_by(professor_id: @id_profe, asignatura_id: @id_asig)
+  end
 
   # se carga la lista de asignaturas asignadas, sin asignar,
   # click en curso
   def lista_asignaturas
-    @asignaturas = Asignatura.all.order('name')
+    @asignaturas = Asignatura.all.order('name').where('lectiva=true')
     @id_curso = params[:id]
     @horario = Horario.new
     @horario.curso_id = @id_curso
+    @lectiva = true
+
+    respond_to do |format|
+      format.js
+      format.json
+    end
+  end
+
+  def lista_asig_no_lectivas
+    @asignaturas = Asignatura.all.order('name').where('lectiva=false')
+    @id_profe = params[:id]
+    @horario = Horario.new
+    @horario.professor_id = @id_profe
+    @lectiva = false
 
     respond_to do |format|
       format.js

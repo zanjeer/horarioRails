@@ -20,8 +20,8 @@ class HorarioPdf < Prawn::Document
     table profes_info_row(p,jefe) do
       row(0).font_style = :bold
       column(1).align = :right
-      self.row_colors = ["EEEEEE", "FFFFFF"]
-      self.header = true
+      self.row_colors = ["FFFFFF","EEEEEE"]
+      # self.header = true
       self.width = 400
       column(0).width = 150
     end
@@ -29,24 +29,54 @@ class HorarioPdf < Prawn::Document
 
   end
 
+  # estructura del pdf
   def profes_info_row(p,jefe)
-    [["Docente", "#{p.name}"]] +
-    es_profe_jefe(p) +
+    [[{:content => "#{p.name}", :colspan => 2}]] +
+    # es_profe_jefe(p) +
     [["Contrato", "#{p.contrato}"]] +
-    asignaturas_profe(p,jefe) +
-    [["Horas Pedagogicas" , horas_pedagogicas(p)],
-    ["Horas Cronologicas", horas_cronologicas(p)]]
+    # asignaturas_profe(p,jefe) +
+    asignaturas_peda_por(p) +
+    [["Total Horas Pedagogicas" , horas_pedagogicas(p)]] +
+     asignaturas_no_peda(p) +
+    [["Total Horas Cronologicas", horas_cronologicas(p)]]
+  end
+
+
+  # asignaturas lectivas por profe
+  # format:  nombre - curso => horas
+  def asignaturas_peda_por(profe)
+    per = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=true')
+    a = per.map do |h|
+      ["#{h.asignatura.name} #{h.curso.name} ", "#{h.horas}"]
+    end
+    # ordena la wea como el pico
+    a.sort
+  end
+
+
+  def asignaturas_no_peda(profe)
+     per = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=false')
+
+      a = per.map do |h|
+        ["#{h.asignatura.name}","#{h.horas}"]
+      end
+      # ordena la wea como el pico
+      a.sort
 
   end
 
+
   def horas_pedagogicas(profe)
-    # busca los horarios donde las asignaturas sean lectivas
+    # busca los horarios donde las asignaturas sean lectivas por profe
     per = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=true')
     per.sum(:horas)
   end
 
   def horas_cronologicas(profe)
-    to_time( (horas_pedagogicas(profe)*45).to_f/60 )
+    total = to_time( (horas_pedagogicas(profe)*45).to_f/60 ).to_d
+    a = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=false')
+    # total = "#{a.sum(:horas)} + #{total} = #{a.sum(:horas) + total}"
+    total += a.sum(:horas)
   end
 
   def horas_peda_por_asignatura(id_profe, id_asig)
@@ -58,11 +88,11 @@ class HorarioPdf < Prawn::Document
     asi = Horario.where('professor_id = ?', profe.id)
     asi.map(&:asignatura).uniq.map do |a|
       if a.lectiva
-        if jefe
-          ["#{a.name}", "#{horas_peda_por_asignatura(profe.id,a.id)} " ]
-        else
+        # if jefe
+        #   ["#{a.name}", "#{horas_peda_por_asignatura(profe.id,a.id)} " ]
+        # else
           ["#{a.name}", "#{lista_cursos_por_asig(a.id,profe.id)} => #{horas_peda_por_asignatura(profe.id,a.id)} " ]
-        end
+        # end
       else
         ["#{a.name}", "#{horas_peda_por_asignatura(profe.id,a.id)}"]
       end

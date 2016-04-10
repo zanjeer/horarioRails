@@ -1,0 +1,7 @@
+
+$('.btn-warning').addClass('btn-success').removeClass('btn-warning');
+$('#<%= "asi_#{@id_asig}" %>').addClass('btn-warning').removeClass('btn-default');
+
+$('#horas_nl').show()
+$('#selec_horas_2').attr('name', '<%= @horario.id %>')
+$('#selec_horas_2').val('<%= @horario.horas %>')

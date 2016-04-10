@@ -1,0 +1,21 @@
+//  lista profes + lista asignaturas no lectivas
+
+$('#no-lec_sin_asignar').html('<%= j render @asignaturas %>');
+$('#no-lect-asig').show()
+$('#horas_nl').hide()
+
+// cambio btn
+// todos los btns default
+$('.btn-danger').addClass('btn-default').removeClass('btn-danger');
+$('#NL<%= @id_profe %>').addClass('btn-danger').removeClass('btn-default');
+
+$('document').ready(function(){
+  $('#selec_horas_2').on('change',function(){
+    $.ajax({
+      url: "/horas_ajax",
+      method: "POST",
+      data: { horas : $(this).val(), id_horario: $(this).attr('name') },
+      dataType: 'json',
+    });
+  });
+})

@@ -17,6 +17,7 @@ class StaticPagesController < ApplicationController
 
   def horario
     @cursos = Curso.all.order('name')
+    @profes = Professor.all.order('name')
   end
 
 

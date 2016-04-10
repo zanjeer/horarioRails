@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <tbody  id="profes">
+    <% @profes.each do |profe| %>
+      <tr id="<%= profe.name %>">
+        <td>
+          <%= profe.name %>
+        </td>
+        <td class="table-btn" >
+          <%= link_to lista_no_lec_path(:id => profe.id), :class => "btn btn-default",
+                      id: "NL#{profe.id}", method: :POST, data: {  remote: true } do %>
+            <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -7,10 +7,6 @@ class AsignaturasController < ApplicationController
     @asignaturas = Asignatura.all
   end
 
-  def esta_asignada(asignatura,curso)
-    @asig_asignadas = Horario.where('curso_id = ? AND asignatura_id = ?', curso, asignatura)
-    @asig_asignadas.any?
-  end
 
   # GET /asignaturas/1
   # GET /asignaturas/1.json
