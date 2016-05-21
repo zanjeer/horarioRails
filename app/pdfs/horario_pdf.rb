@@ -42,21 +42,22 @@ class HorarioPdf < Prawn::Document
   end
 
 
-  # asignaturas lectivas por profe
+  # asignaturas lectivas por curso de profe
   # format:  nombre - curso => horas
   def asignaturas_peda_por(profe)
-    per = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=true')
+    # per = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=true')
+    per = Horario.where('professor_id = ?', profe.id).joins(:asignatura)
+    .where('asignaturas.lectiva=TRUE').order('asignaturas.orden')
     a = per.map do |h|
       ["#{h.asignatura.name} #{h.curso.name} ", "#{h.horas}"]
     end
-    # ordena la wea como el pico
-    a.sort
+
   end
 
 
   def asignaturas_no_peda(profe)
-     per = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=false')
-
+    per = Horario.where('professor_id = ?', profe.id).joins(:asignatura)
+    .where('asignaturas.lectiva=FALSE').order('asignaturas.orden')
       a = per.map do |h|
         ["#{h.asignatura.name}","#{h.horas}"]
       end
@@ -73,6 +74,7 @@ class HorarioPdf < Prawn::Document
   end
 
   def horas_cronologicas(profe)
+    # horas pedagogicas llegan como string
     total = to_time( (horas_pedagogicas(profe)*45).to_f/60 ).to_d
     a = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=false')
     # total = "#{a.sum(:horas)} + #{total} = #{a.sum(:horas) + total}"

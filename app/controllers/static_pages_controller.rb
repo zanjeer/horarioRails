@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
     @profes = Professor.all.order('name')
 
     @asignatura = Asignatura.new
-    @asigs = Asignatura.all.order('name')
+    @asigs = Asignatura.all.order('orden')
 
     @prof_selec = Professor.all.order('name').map do |p|
         ["#{p.id}", "#{p.name}"]

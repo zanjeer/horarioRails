@@ -1,6 +1,9 @@
   <tr id="<%= asignatura.name %>">
     <% unless @horario %>
       <td>
+        <span><%= best_in_place asignatura, :orden %></span>
+      </td>
+      <td>
         <span><%= best_in_place asignatura, :name, tabindex: "1" %></span>
       </td>
       <td style="text-align: center">
