@@ -2,6 +2,8 @@
 $('.btn-warning').addClass('btn-success').removeClass('btn-warning');
 $('#<%= "asi_#{@id_asig}" %>').addClass('btn-warning').removeClass('btn-default');
 
+$('#no-lec_sin_asignar').html('<%= j render @asignaturas %>');
+
 $('#horas_nl').show()
 $('#selec_horas_2').attr('name', '<%= @horario.id %>')
 $('#selec_horas_2').val('<%= @horario.horas %>')

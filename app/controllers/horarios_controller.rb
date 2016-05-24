@@ -15,6 +15,8 @@ class HorariosController < ApplicationController
   end
 
   def horas_no_lec
+    @asignaturas = Asignatura.where('lectiva=false').order('orden')
+    @lectiva = false
     @id_asig = params[:id_asig]
     @id_profe = params[:id_profe]
     @horario = Horario.new
@@ -25,15 +27,22 @@ class HorariosController < ApplicationController
   end
 
   def horas_no_lec_agre
+    @asignaturas = Asignatura.where('lectiva=false').order('orden')
+    @lectiva = false
     @id_asig = params[:id_asig]
     @id_profe = params[:id_profe]
     @horario = Horario.find_by(professor_id: @id_profe, asignatura_id: @id_asig)
+
+    respond_to do |format|
+      format.js
+      format.json
+    end
   end
 
   # se carga la lista de asignaturas asignadas, sin asignar,
   # click en curso
   def lista_asignaturas
-    @asignaturas = Asignatura.all.order('name').where('lectiva=true')
+    @asignaturas = Asignatura.all.order('orden').where('lectiva=true')
     @id_curso = params[:id]
     @horario = Horario.new
     @horario.curso_id = @id_curso
@@ -46,7 +55,7 @@ class HorariosController < ApplicationController
   end
 
   def lista_asig_no_lectivas
-    @asignaturas = Asignatura.all.order('name').where('lectiva=false')
+    @asignaturas = Asignatura.all.order('orden').where('lectiva=false')
     @id_profe = params[:id]
     @horario = Horario.new
     @horario.professor_id = @id_profe
@@ -61,9 +70,9 @@ class HorariosController < ApplicationController
   # se buscan  las asignaturas del curso
   # click en asignatura
   def lista_profes
-    @asignaturas = Asignatura.all.order('name')
+    @asignaturas = Asignatura.where('lectiva=true').order('orden')
     @professors = Professor.all.order('name')
-
+    @lectiva = true
     @id_asig = params[:id_asig]
     @id_curso = params[:id_curso]
 
@@ -110,11 +119,20 @@ class HorariosController < ApplicationController
   end
 
   def borrar_asignatura
-    @asignaturas = Asignatura.all.order('name')
-
+    @asignaturas = Asignatura.where('lectiva=true').order('orden')
+    @lectiva = true
     @id_asig = params[:id_asig]
     @id_curso = params[:id_curso]
     @horario = Horario.find_by(curso_id: @id_curso, asignatura_id: @id_asig)
+    @horario.destroy
+  end
+
+  def borrar_asignatura_no_lec
+    @asignaturas = Asignatura.where('lectiva=false').order('orden')
+    @lectiva = false
+    @id_asig = params[:id_asig]
+    @id_profe = params[:id_profe]
+    @horario = Horario.find_by(professor_id: @id_profe, asignatura_id: @id_asig)
     @horario.destroy
   end
 

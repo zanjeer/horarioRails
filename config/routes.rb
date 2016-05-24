@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'agregar_horas' => 'horarios#agregar_horas'
   post 'quitar_horas' => 'horarios#quitar_horas'
   post 'borrar_asig_agregados' => 'horarios#borrar_asignatura'
+  post 'borrar_asig_no_lec' => 'horarios#borrar_asignatura_no_lec'
   post 'horas_ajax' => 'horarios#horas_ajax'
   get 'informe' => 'horarios#informe'
 

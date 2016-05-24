@@ -64,6 +64,16 @@
         <% else %>
           <!-- link asignar horas no lectivas -->
           <% if esta_asig asignatura.id %>
+
+            <%= link_to borrar_asig_no_lec_path(:id_asig => asignatura.id,
+                                              :id_profe => @id_profe),
+                                              :class => "btn btn-default btn-xs",
+                                              id: "borrar_#{asignatura.id}",
+                                              method: :POST,
+                                              data: {  remote: true } do %>
+                  <i class="glyphicon glyphicon-remove" style="color: #CA2B2B"></i>
+            <% end %>
+
             <%= link_to horas_no_lectivas_agre_path(:id_asig => asignatura.id,
                                               :id_profe => @id_profe),
                                               :class => "btn btn-success",
