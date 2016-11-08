@@ -3,7 +3,7 @@ class HorarioPdf < Prawn::Document
 
   def initialize(profes, profes_jefes)
     super(top_margin: 30)
-    text "Carga Horaria #{Time.now.year}", :align => :center
+    text "Carga Horaria 2017", :align => :center
     move_down 20
     # text "Profesores:", :align => :left
     profes_jefes.each do |profe|
