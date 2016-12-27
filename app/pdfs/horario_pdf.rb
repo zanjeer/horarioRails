@@ -6,7 +6,7 @@ class HorarioPdf < Prawn::Document
     move_down 20
     # text "Profesores:", :align => :left
     profes_jefes.each do |profe|
-      text "Carga Horaria 2017 jefe", :align => :center
+      text "Carga Horaria 2017", :align => :center
       profes_info(profe,true)
       start_new_page
     end
