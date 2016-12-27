@@ -3,7 +3,7 @@ class HorariosController < ApplicationController
   def informe
     # @profes = Professor.all.order('name')
     @profes_jefes = Professor.all.joins(:cursos).order('cursos.name')
-    @profes =Professor.all.where.not(id: Curso.select(:professor_id)).order('name')
+    @profes = Professor.all.where.not(id: Curso.select(:professor_id)).order('name')
     respond_to do |format|
       format.pdf do
         pdf = HorarioPdf.new(@profes, @profes_jefes)

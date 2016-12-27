@@ -3,15 +3,18 @@ class HorarioPdf < Prawn::Document
 
   def initialize(profes, profes_jefes)
     super(top_margin: 30)
-    text "Carga Horaria 2017", :align => :center
     move_down 20
     # text "Profesores:", :align => :left
     profes_jefes.each do |profe|
+      text "Carga Horaria 2017 jefe", :align => :center
       profes_info(profe,true)
+      start_new_page
     end
     move_down 10
     profes.each do |profe|
+      text "Carga Horaria 2017", :align => :center
       profes_info(profe,false)
+      start_new_page
     end
   end
 
@@ -131,9 +134,9 @@ class HorarioPdf < Prawn::Document
   def es_profe_jefe(profe)
     a = Curso.find_by(professor_id: profe.id)
     if a
-      [["Curso","#{a.name}."]]
+      [["Curso Jefatura","#{a.name}."]]
     else
-      [["Curso", "-"]]
+      [["Curso Jefatura", "-"]]
     end
   end
 
