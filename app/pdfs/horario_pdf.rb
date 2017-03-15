@@ -83,7 +83,8 @@ class HorarioPdf < Prawn::Document
     # total = "#{a.sum(:horas)} + #{total} = #{a.sum(:horas) + total}"
     # total += a.sum(:horas)
     horas_no_lectivas =  to_hora( a.sum(:horas) )
-    to_hora(total) += horas_no_lectivas.to_d
+    total += horas_no_lectivas.to_d
+    to_hora(total)
   end
 
   def horas_peda_por_asignatura(id_profe, id_asig)
