@@ -81,7 +81,7 @@ class HorarioPdf < Prawn::Document
     total = to_time( (horas_pedagogicas(profe)*45).to_f/60 ).to_d
     a = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=false')
     # total = "#{a.sum(:horas)} + #{total} = #{a.sum(:horas) + total}"
-    total += a.sum(:horas).to_d
+    total 
   end
 
   def horas_peda_por_asignatura(id_profe, id_asig)
