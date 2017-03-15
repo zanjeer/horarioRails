@@ -136,9 +136,9 @@ class HorarioPdf < Prawn::Document
     n = number.to_s.split(".") # 1.25 [0]=> 1, [1]=> 25
     hora = n[0].to_i
     min = n[1].to_i
-    while $min >= 6 do
-      $min = $min - 6
-      # $hora +=1
+    while min >= 6 do
+      min = min - 6
+      # hora +=1
     end
     final = "#{hora}.#{min}"
   end
