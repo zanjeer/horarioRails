@@ -78,13 +78,14 @@ class HorarioPdf < Prawn::Document
 
   def horas_cronologicas(profe)
     # horas pedagogicas llegan como string
-    total = to_time( (horas_pedagogicas(profe)*45).to_f/60 ).to_d
+    total = to_time( (horas_pedagogicas(profe)*45).to_f/60 )
+
     a = Horario.where('professor_id = ?', profe.id).joins(:asignatura).where('lectiva=false')
     # total = "#{a.sum(:horas)} + #{total} = #{a.sum(:horas) + total}"
     # total += a.sum(:horas)
     horas_no_lectivas =  to_hora( a.sum(:horas) )
-    total += horas_no_lectivas.to_d
-    # total
+    total += horas_no_lectivas
+    to_hora(total)
   end
 
   def horas_peda_por_asignatura(id_profe, id_asig)
