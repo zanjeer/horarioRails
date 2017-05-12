@@ -83,13 +83,13 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
+    mysql2 (0.4.6)
+    mysql2 (0.4.6-x64-mingw32)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     nokogiri (1.6.7.2-x64-mingw32)
       mini_portile2 (~> 2.0.0.rc2)
     pdf-core (0.6.0)
-    pg (0.18.4)
-    pg (0.18.4-x64-mingw32)
     prawn (2.0.2)
       pdf-core (~> 0.6.0)
       ttfunk (~> 1.4.0)
@@ -177,7 +177,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
-  pg (~> 0.15)
+  mysql2
   prawn-rails
   rails (= 4.2.5)
   sass-rails (~> 5.0)
@@ -188,4 +188,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.12.5
+   1.13.6

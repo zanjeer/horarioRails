@@ -1,4 +1,16 @@
+
 Rails.application.routes.draw do
+  namespace :api, defaults: {format: 'json'} do
+    root 'api#info'
+    scope module: :v1 do
+      resources :cursos
+      resources :professors
+      resources :asignaturas
+      resources :horarios
+    end
+
+  end
+
 
   root 'static_pages#horario'
   get 'datos' => 'static_pages#home'
@@ -17,6 +29,7 @@ Rails.application.routes.draw do
   post 'borrar_asig_no_lec' => 'horarios#borrar_asignatura_no_lec'
   post 'horas_ajax' => 'horarios#horas_ajax'
   get 'informe' => 'horarios#informe'
+
 
   resources :professors
   resources :asignaturas

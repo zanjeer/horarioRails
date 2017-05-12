@@ -11,35 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520224215) do
+ActiveRecord::Schema.define(version: 20170510210836) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "access_token", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "asignaturas", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.boolean  "lectiva"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "orden"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "orden",      limit: 4
   end
 
   create_table "cursos", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "professor_id"
+    t.string   "name",         limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "professor_id", limit: 4
   end
 
   add_index "cursos", ["professor_id"], name: "index_cursos_on_professor_id", using: :btree
 
   create_table "horarios", force: :cascade do |t|
-    t.decimal  "horas"
-    t.integer  "professor_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "curso_id"
-    t.integer  "asignatura_id"
+    t.decimal  "horas",                   precision: 10
+    t.integer  "professor_id",  limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "curso_id",      limit: 4
+    t.integer  "asignatura_id", limit: 4
   end
 
   add_index "horarios", ["asignatura_id", "curso_id"], name: "index_horarios_on_asignatura_id_and_curso_id", unique: true, using: :btree
@@ -48,10 +51,10 @@ ActiveRecord::Schema.define(version: 20160520224215) do
   add_index "horarios", ["professor_id"], name: "index_horarios_on_professor_id", using: :btree
 
   create_table "professors", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "contrato"
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "contrato",   limit: 4
   end
 
   add_foreign_key "cursos", "professors"

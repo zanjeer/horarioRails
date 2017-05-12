@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'mysql2'
 gem 'prawn-rails'
 gem 'best_in_place', '~> 3.0.1'
 gem 'bootstrap-sass'

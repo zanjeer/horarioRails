@@ -14,6 +14,9 @@ class HorariosController < ApplicationController
     end
   end
 
+  # lista asignaturas no lectivas
+  # asignar asignatura
+  # los profesores tienen horas no lectivas
   def horas_no_lec
     @asignaturas = Asignatura.where('lectiva=false').order('orden')
     @lectiva = false
@@ -26,6 +29,8 @@ class HorariosController < ApplicationController
 
   end
 
+  # lista asignaturas lectivas de un profesor
+  #
   def horas_no_lec_agre
     @asignaturas = Asignatura.where('lectiva=false').order('orden')
     @lectiva = false
@@ -39,8 +44,8 @@ class HorariosController < ApplicationController
     end
   end
 
-  # se carga la lista de asignaturas asignadas, sin asignar,
-  # click en curso
+  # lista asignaturas lectivas al hacer click en lista de cursos
+  # se crea un horario base
   def lista_asignaturas
     @asignaturas = Asignatura.all.order('orden').where('lectiva=true')
     @id_curso = params[:id]
@@ -54,6 +59,8 @@ class HorariosController < ApplicationController
     end
   end
 
+  # lista asignaturas no lectivas
+  # horario base
   def lista_asig_no_lectivas
     @asignaturas = Asignatura.all.order('orden').where('lectiva=false')
     @id_profe = params[:id]
@@ -67,8 +74,8 @@ class HorariosController < ApplicationController
     end
   end
 
-  # se buscan  las asignaturas del curso
-  # click en asignatura
+  # lista de profesores al hacer click en una asignatura
+  # curso + asig + profe
   def lista_profes
     @asignaturas = Asignatura.where('lectiva=true').order('orden')
     @professors = Professor.all.order('name')
@@ -84,6 +91,7 @@ class HorariosController < ApplicationController
 
   end
 
+  # lista profesores agregados a un curso y asignatura
   def l_profes_agregados
     @professors = Professor.all.order('name')
 
@@ -94,6 +102,7 @@ class HorariosController < ApplicationController
   end
 
   # agregar profe + horas
+  # lista profes al hacer click en una asignautra
   def agregar_horas
     @professors = Professor.all.order('name')
 
@@ -106,6 +115,8 @@ class HorariosController < ApplicationController
     @horario.save
   end
 
+  # lista profesores de un curso y asignatura
+  # quita al profesor seleccionado
   def quitar_horas
     @professors = Professor.all.order('name')
 
@@ -118,6 +129,8 @@ class HorariosController < ApplicationController
     @horario.save
   end
 
+  # lista asignaturas lectivas
+  # se borra la asignatura por lo que se borra el horario
   def borrar_asignatura
     @asignaturas = Asignatura.where('lectiva=true').order('orden')
     @lectiva = true
@@ -127,6 +140,8 @@ class HorariosController < ApplicationController
     @horario.destroy
   end
 
+  # lista asignaturas no lectivas
+  # se quita asignatura el horario se borra
   def borrar_asignatura_no_lec
     @asignaturas = Asignatura.where('lectiva=false').order('orden')
     @lectiva = false
@@ -136,6 +151,7 @@ class HorariosController < ApplicationController
     @horario.destroy
   end
 
+  # actualiza las horas de un horario especifico
   def horas_ajax
     @id = params[:id_horario]
     @horas = params[:horas]
@@ -143,6 +159,7 @@ class HorariosController < ApplicationController
     @horario.horas = @horas
     @horario.save
   end
+  
   # GET /horarios
   # GET /horarios.json
   def index
