@@ -7,13 +7,12 @@ class Api::V1::CursosController < Api::ApiController
   # GET /cursos
   # GET /cursos.json
   def index
-     respond Curso.all
+     @cursos = Curso.all
   end
 
   # GET /cursos/1
   # GET /cursos/1.json
   def show
-		respond @curso
   end
 
   # POST /cursos
@@ -52,13 +51,6 @@ class Api::V1::CursosController < Api::ApiController
   end
 
   private
-		# respond_whit in house replacement pls
-		def respond(response)
-			respond_to do |format|
-					format.json { render json: response }
-				end
-		end
-
 		# always respond with json
   	def set_default_response_format
 		  request.format = :json

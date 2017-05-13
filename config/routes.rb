@@ -1,8 +1,8 @@
 
 Rails.application.routes.draw do
-  namespace :api, defaults: {format: 'json'} do
+  namespace :api do
     root 'api#info'
-    scope module: :v1 do
+    scope module: :v1, defaults: {format: 'json'} do
       resources :cursos
       resources :professors
       resources :asignaturas

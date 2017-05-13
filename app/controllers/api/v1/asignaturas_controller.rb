@@ -2,18 +2,17 @@ class Api::V1::AsignaturasController < Api::ApiController
   # no CSRF protection for this api
   protect_from_forgery with: :null_session
 
-  before_action  :set_default_response_format,:set_asignatura, only: [:show, :edit, :update, :destroy]
+  before_action  :set_default_response_format, :set_asignatura, only: [:show, :edit, :update, :destroy]
 
   # GET /asignaturas
   # GET /asignaturas.json
   def index
-    respond Asignatura.all
+    @asignaturas = Asignatura.all
   end
 
   # GET /asignaturas/1
   # GET /asignaturas/1.json
   def show
-    respond @asignatura
   end
 
   # POST /asignaturas
@@ -52,13 +51,6 @@ class Api::V1::AsignaturasController < Api::ApiController
   end
 
   private
-    # respond_whit in house replacement pls
-    def respond(response)
-      respond_to do |format|
-          format.json { render json: response }
-        end
-    end
-
     # always respond with json
     def set_default_response_format
       request.format = :json

@@ -6,21 +6,13 @@ class Api::V1::HorariosController < Api::ApiController
   # GET /horarios
   # GET /horarios.json
   def index
-    @h = Horario.all.map do |h|
-      {
-        :id => h.id, :horas => h.horas,
-        :professor_id => h.professor_id, :name_professor => h.professor.name,
-        :curso_id => h.curso_id, :name_curso => h.curso.name,
-        :asignatura_id => h.asignatura_id, :name_asignatura => h.asignatura.name
-      }
-    end
-    respond @h
+    @horarios = Horario.all
   end
 
   # GET /horarios/1
   # GET /horarios/1.json
+  # view/api/api/jbuilder
   def show
-    respond @horario
   end
 
   # POST /horarios
@@ -59,13 +51,6 @@ class Api::V1::HorariosController < Api::ApiController
   end
 
   private
-    # respond_whit in house replacement pls
-    def respond(response)
-      respond_to do |format|
-          format.json { render json: response }
-        end
-    end
-
     # always respond with json
     def set_default_response_format
       request.format = :json
